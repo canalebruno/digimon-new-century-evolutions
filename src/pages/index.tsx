@@ -1,11 +1,25 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import styles from '@/styles/Home.module.css'
+import Head from "next/head";
+import Image from "next/image";
+import { Inter } from "next/font/google";
+import styles from "@/styles/Home.module.css";
+import digimonList from "../json/digimonList.json";
+import Card from "@/component/Card";
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+  const babyDigimonList = digimonList.filter((digimon) => digimon.level === 1);
+
+  function findEvolutions(ids: number[] | never[]) {
+    return ids.map((id) => {
+      if (!id || id >= 1000) {
+        return;
+      }
+
+      return digimonList.find((digimon) => digimon.id === id);
+    });
+  }
+
   return (
     <>
       <Head>
@@ -15,100 +29,188 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={`${styles.main} ${inter.className}`}>
-        <div className={styles.description}>
-          <p>
-            Get started by editing&nbsp;
-            <code className={styles.code}>src/pages/index.tsx</code>
-          </p>
+        <div style={{ paddingBottom: "2rem" }}>
           <div>
-            <a
-              href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              By{' '}
-              <Image
-                src="/vercel.svg"
-                alt="Vercel Logo"
-                className={styles.vercelLogo}
-                width={100}
-                height={24}
-                priority
-              />
-            </a>
+            {babyDigimonList.map((digimon1) => {
+              return (
+                <div style={{ display: "flex" }} key={digimon1.id}>
+                  <Card digimon={digimon1} />
+                  {digimon1.evolveTo.length > 0 && (
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                      }}
+                    >
+                      {findEvolutions(digimon1.evolveTo).map((digimon2) => {
+                        if (digimon2 === undefined) {
+                          return;
+                        }
+
+                        return (
+                          <div key={digimon2.id} style={{ display: "flex" }}>
+                            <Card digimon={digimon2} />
+                            {digimon2.evolveTo.length > 0 && (
+                              <div>
+                                {findEvolutions(digimon2.evolveTo).map(
+                                  (digimon3) => {
+                                    if (digimon3 === undefined) {
+                                      return;
+                                    }
+                                    return (
+                                      <div
+                                        key={digimon3.id}
+                                        style={{
+                                          display: "flex",
+                                        }}
+                                      >
+                                        <Card digimon={digimon3} />
+                                        {digimon3.evolveTo.length > 0 && (
+                                          <div>
+                                            {findEvolutions(
+                                              digimon3.evolveTo
+                                            ).map((digimon4) => {
+                                              if (digimon4 === undefined) {
+                                                return;
+                                              }
+                                              return (
+                                                <div
+                                                  key={digimon4.id}
+                                                  style={{
+                                                    display: "flex",
+                                                  }}
+                                                >
+                                                  <Card digimon={digimon4} />
+                                                  {digimon4.evolveTo.length >
+                                                    0 && (
+                                                    <div>
+                                                      {findEvolutions(
+                                                        digimon4.evolveTo
+                                                      ).map((digimon5) => {
+                                                        if (
+                                                          digimon5 === undefined
+                                                        ) {
+                                                          return;
+                                                        }
+
+                                                        //incio
+                                                        // return (
+                                                        //   <Card
+                                                        //     digimon={digimon5}
+                                                        //   />
+                                                        // );
+                                                        return (
+                                                          <div
+                                                            key={digimon5.id}
+                                                            style={{
+                                                              display: "flex",
+                                                            }}
+                                                          >
+                                                            <Card
+                                                              digimon={digimon5}
+                                                            />
+                                                            {digimon5.evolveTo
+                                                              .length > 0 && (
+                                                              <div>
+                                                                {findEvolutions(
+                                                                  digimon5.evolveTo
+                                                                ).map(
+                                                                  (
+                                                                    digimon6
+                                                                  ) => {
+                                                                    if (
+                                                                      digimon6 ===
+                                                                      undefined
+                                                                    ) {
+                                                                      return;
+                                                                    }
+                                                                    //i
+                                                                    // return (
+                                                                    //   <Card
+                                                                    //     digimon={
+                                                                    //       digimon6
+                                                                    //     }
+                                                                    //   />
+                                                                    // );
+                                                                    return (
+                                                                      <div
+                                                                        key={
+                                                                          digimon6.id
+                                                                        }
+                                                                        style={{
+                                                                          display:
+                                                                            "flex",
+                                                                        }}
+                                                                      >
+                                                                        <Card
+                                                                          digimon={
+                                                                            digimon6
+                                                                          }
+                                                                        />
+                                                                        {digimon6
+                                                                          .evolveTo
+                                                                          .length >
+                                                                          0 && (
+                                                                          <div>
+                                                                            {findEvolutions(
+                                                                              digimon6.evolveTo
+                                                                            ).map(
+                                                                              (
+                                                                                digimon7
+                                                                              ) => {
+                                                                                if (
+                                                                                  digimon7 ===
+                                                                                  undefined
+                                                                                ) {
+                                                                                  return;
+                                                                                }
+
+                                                                                return (
+                                                                                  <Card
+                                                                                    digimon={
+                                                                                      digimon7
+                                                                                    }
+                                                                                  />
+                                                                                );
+                                                                              }
+                                                                            )}
+                                                                          </div>
+                                                                        )}
+                                                                      </div>
+                                                                    );
+                                                                    //f
+                                                                  }
+                                                                )}
+                                                              </div>
+                                                            )}
+                                                          </div>
+                                                        );
+                                                        //fim
+                                                      })}
+                                                    </div>
+                                                  )}
+                                                </div>
+                                              );
+                                            })}
+                                          </div>
+                                        )}
+                                      </div>
+                                    );
+                                  }
+                                )}
+                              </div>
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </div>
-        </div>
-
-        <div className={styles.center}>
-          <Image
-            className={styles.logo}
-            src="/next.svg"
-            alt="Next.js Logo"
-            width={180}
-            height={37}
-            priority
-          />
-        </div>
-
-        <div className={styles.grid}>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2>
-              Docs <span>-&gt;</span>
-            </h2>
-            <p>
-              Find in-depth information about Next.js features and&nbsp;API.
-            </p>
-          </a>
-
-          <a
-            href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2>
-              Learn <span>-&gt;</span>
-            </h2>
-            <p>
-              Learn about Next.js in an interactive course with&nbsp;quizzes!
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2>
-              Templates <span>-&gt;</span>
-            </h2>
-            <p>
-              Discover and deploy boilerplate example Next.js&nbsp;projects.
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2>
-              Deploy <span>-&gt;</span>
-            </h2>
-            <p>
-              Instantly deploy your Next.js site to a shareable URL
-              with&nbsp;Vercel.
-            </p>
-          </a>
         </div>
       </main>
     </>
-  )
+  );
 }
