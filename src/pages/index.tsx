@@ -1,5 +1,4 @@
 import Head from "next/head";
-import Image from "next/image";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import digimonList from "../json/digimonList.json";
@@ -34,7 +33,7 @@ export default function Home() {
             {babyDigimonList.map((digimon1) => {
               return (
                 <div style={{ display: "flex" }} key={digimon1.id}>
-                  <Card digimon={digimon1} />
+                  <Card evolutionChart digimon={digimon1} />
                   {digimon1.evolveTo.length > 0 && (
                     <div
                       style={{
@@ -49,7 +48,7 @@ export default function Home() {
 
                         return (
                           <div key={digimon2.id} style={{ display: "flex" }}>
-                            <Card digimon={digimon2} />
+                            <Card evolutionChart digimon={digimon2} />
                             {digimon2.evolveTo.length > 0 && (
                               <div>
                                 {findEvolutions(digimon2.evolveTo).map(
@@ -64,7 +63,10 @@ export default function Home() {
                                           display: "flex",
                                         }}
                                       >
-                                        <Card digimon={digimon3} />
+                                        <Card
+                                          evolutionChart
+                                          digimon={digimon3}
+                                        />
                                         {digimon3.evolveTo.length > 0 && (
                                           <div>
                                             {findEvolutions(
@@ -80,7 +82,10 @@ export default function Home() {
                                                     display: "flex",
                                                   }}
                                                 >
-                                                  <Card digimon={digimon4} />
+                                                  <Card
+                                                    evolutionChart
+                                                    digimon={digimon4}
+                                                  />
                                                   {digimon4.evolveTo.length >
                                                     0 && (
                                                     <div>
@@ -95,7 +100,7 @@ export default function Home() {
 
                                                         //incio
                                                         // return (
-                                                        //   <Card
+                                                        //   <Card evolutionChart
                                                         //     digimon={digimon5}
                                                         //   />
                                                         // );
@@ -107,6 +112,7 @@ export default function Home() {
                                                             }}
                                                           >
                                                             <Card
+                                                              evolutionChart
                                                               digimon={digimon5}
                                                             />
                                                             {digimon5.evolveTo
@@ -126,7 +132,7 @@ export default function Home() {
                                                                     }
                                                                     //i
                                                                     // return (
-                                                                    //   <Card
+                                                                    //   <Card evolutionChart
                                                                     //     digimon={
                                                                     //       digimon6
                                                                     //     }
@@ -143,6 +149,7 @@ export default function Home() {
                                                                         }}
                                                                       >
                                                                         <Card
+                                                                          evolutionChart
                                                                           digimon={
                                                                             digimon6
                                                                           }
@@ -167,6 +174,7 @@ export default function Home() {
 
                                                                                 return (
                                                                                   <Card
+                                                                                    evolutionChart
                                                                                     digimon={
                                                                                       digimon7
                                                                                     }

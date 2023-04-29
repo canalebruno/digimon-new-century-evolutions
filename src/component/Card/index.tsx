@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
+import styles from "./styles.module.scss";
+// import { Digimon } from "../../utils/types";
 
 interface CardProps {
   digimon: Digimon;
+  evolutionChart?: boolean;
 }
 
 interface Digimon {
@@ -17,62 +20,44 @@ interface Digimon {
   xEvolution: boolean;
 }
 
-export default function Card({ digimon }: CardProps) {
+export default function Card({ digimon, evolutionChart = false }: CardProps) {
   const [topPadding, setTopPadding] = useState(0);
   const [bottomPadding, setBottomPadding] = useState(0);
 
   useEffect(() => {
     if (typeof document !== "undefined") {
-      const topElement = document.getElementById(`${digimon.evolveTo[0]}-card`);
+      const topElement = document.getElementById(
+        `${digimon.evolveTo[0]}-container`
+      );
       const bottomElement = document.getElementById(
-        `${digimon.evolveTo[digimon.evolveTo.length - 1]}-card`
+        `${digimon.evolveTo[digimon.evolveTo.length - 1]}-container`
       );
 
-      console.log(digimon.evolveTo[digimon.evolveTo.length]);
-
       if (topElement) {
-        setTopPadding(topElement.offsetHeight / 2);
+        setTopPadding(topElement.offsetHeight / 2 - 1.5);
       }
 
       if (bottomElement) {
-        setBottomPadding(bottomElement.offsetHeight / 2);
+        setBottomPadding(bottomElement.offsetHeight / 2 - 2.5);
       }
     }
-  }, []);
+  }, [topPadding, bottomPadding]);
 
   function backgroundColorByLevel(level: number) {
     switch (level) {
       case 3:
         return "blue";
-        break;
       case 4:
         return "red";
-        break;
       case 5:
         return "yellow";
-        break;
       case 6:
         return "purple";
-        break;
       case 7:
         return "gray";
-        break;
       default:
         return "white";
     }
-  }
-
-  function getHalfCardHeight(id: number) {
-    // if (typeof document !== "undefined") {
-    const element = document.getElementById(`${id}-card`);
-
-    if (element) {
-      console.log(element.offsetHeight / 2);
-      return element.offsetHeight / 2;
-    }
-    // }
-
-    return 0;
   }
 
   function verticalConnector() {
@@ -85,7 +70,7 @@ export default function Card({ digimon }: CardProps) {
         width="20px"
       >
         <polyline
-          points="10,0 10,1000"
+          points="8,0 8,5000"
           style={{ fill: "none", stroke: "black", strokeWidth: 3 }}
         />
         Sorry, your browser does not support inline SVG.
@@ -97,14 +82,13 @@ export default function Card({ digimon }: CardProps) {
     return (
       <svg
         style={{
-          margin: 0,
-          justifySelf: alignTo === "right" ? "flex-end" : "flex-start",
+          marginLeft: alignTo === "left" ? "-0.5rem" : "0",
         }}
         height="10px"
-        width="20px"
+        width="1.5rem"
       >
         <polyline
-          points="0,5 20,5"
+          points="0,5 50,5"
           style={{ fill: "none", stroke: "black", strokeWidth: 3 }}
         />
         Sorry, your browser does not support inline SVG.
@@ -113,40 +97,38 @@ export default function Card({ digimon }: CardProps) {
   }
 
   return (
-    <div style={{ display: "flex", alignItems: "center", margin: "1rem 0 " }}>
+    <div className={styles.container} id={`${digimon.id}-container`}>
       <div
-        id={`${digimon.id}-card`}
-        style={{
-          border: "1px solid black",
-          padding: "1rem 0",
-          backgroundColor: backgroundColorByLevel(digimon.level),
-          display: "grid",
-          gridTemplateColumns: "1fr 1fr 1fr",
-          alignItems: "center",
-          width: "10rem",
-          height: "100%",
-        }}
+        className={styles.card}
+        style={{ backgroundColor: backgroundColorByLevel(digimon.level) }}
       >
-        {/* {digimon.evolveFrom.length > 0 && <div>{"<"}</div>} */}
-        {digimon.evolveFrom.length > 0 ? horizontalConnector("left") : <div />}
-        <div>
+        <div className={styles.connectorContainer}>
+          {evolutionChart && digimon.evolveFrom.length > 0 ? (
+            horizontalConnector("left")
+          ) : (
+            <div />
+          )}
+        </div>
+        <div className={styles.imageContainer}>
           <img src={`/${digimon.id}.png`} alt={digimon.name} />
         </div>
-        {/* {digimon.evolveTo.length > 0 && <div>{">"}</div>} */}
-        {digimon.evolveTo.length > 0 && horizontalConnector("right")}
+
+        <div className={styles.connectorContainer}>
+          {evolutionChart &&
+            digimon.evolveTo.length > 0 &&
+            horizontalConnector("right")}
+        </div>
       </div>
-      {digimon.evolveTo.length > 0 && (
+      {evolutionChart && digimon.evolveTo.length > 0 && (
         <div
           style={{
-            width: "20px",
+            width: "1rem",
             height: digimon.evolveTo.length > 1 ? "100%" : undefined,
             paddingTop: topPadding,
             paddingBottom: bottomPadding,
           }}
         >
-          {digimon.evolveTo.length === 1
-            ? horizontalConnector("left")
-            : verticalConnector()}
+          {digimon.evolveTo.length > 1 && verticalConnector()}
         </div>
       )}
     </div>
