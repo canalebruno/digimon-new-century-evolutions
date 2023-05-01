@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import styles from "./styles.module.scss";
+import nameFormatting from "@/utils/formatting";
 // import { Digimon } from "../../utils/types";
 
 interface CardProps {
@@ -23,6 +24,7 @@ interface Digimon {
 export default function Card({ digimon, evolutionChart = false }: CardProps) {
   const [topPadding, setTopPadding] = useState(0);
   const [bottomPadding, setBottomPadding] = useState(0);
+  const [overlayActive, setOverlayActive] = useState(false);
 
   useEffect(() => {
     if (typeof document !== "undefined") {
@@ -34,7 +36,7 @@ export default function Card({ digimon, evolutionChart = false }: CardProps) {
       );
 
       if (topElement) {
-        setTopPadding(topElement.offsetHeight / 2 - 1.5);
+        setTopPadding(topElement.offsetHeight / 2);
       }
 
       if (bottomElement) {
@@ -100,8 +102,18 @@ export default function Card({ digimon, evolutionChart = false }: CardProps) {
     <div className={styles.container} id={`${digimon.id}-container`}>
       <div
         className={styles.card}
+        onMouseEnter={() => setOverlayActive(true)}
+        onMouseLeave={() => setOverlayActive(false)}
         style={{ backgroundColor: backgroundColorByLevel(digimon.level) }}
       >
+        <div
+          className={styles.overlayContainer}
+          style={{ display: overlayActive ? "flex" : "none" }}
+        >
+          <p
+            dangerouslySetInnerHTML={{ __html: nameFormatting(digimon.name) }}
+          />
+        </div>
         <div className={styles.connectorContainer}>
           {evolutionChart && digimon.evolveFrom.length > 0 ? (
             horizontalConnector("left")

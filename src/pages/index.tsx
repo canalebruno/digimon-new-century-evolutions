@@ -9,6 +9,8 @@ const inter = Inter({ subsets: ["latin"] });
 export default function Home() {
   const babyDigimonList = digimonList.filter((digimon) => digimon.level === 1);
 
+  console.log(digimonList.sort((a, b) => a.id - b.id));
+
   function findEvolutions(ids: number[] | never[]) {
     return ids.map((id) => {
       if (!id || id >= 1000) {

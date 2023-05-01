@@ -3,28 +3,89 @@ import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import digimonList from "../json/digimonList.json";
 import Card from "@/component/Card";
+import { Digimon } from "../utils/types";
 import Group from "@/component/Group";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function List() {
-  const babyDigimonList = digimonList.filter((digimon) => digimon.level === 1);
-  const inTrainingDigimonList = digimonList.filter(
-    (digimon) => digimon.level === 2
-  );
-  const rookieDigimonList = digimonList.filter(
-    (digimon) => digimon.level === 3
-  );
-  const adultDigimonList = digimonList.filter((digimon) => digimon.level === 4);
-  const perfectDigimonList = digimonList.filter(
-    (digimon) => digimon.level === 5
-  );
-  const ultimateDigimonList = digimonList.filter(
-    (digimon) => digimon.level === 6
-  );
-  const superUltimateDigimonList = digimonList.filter(
-    (digimon) => digimon.level === 7
-  );
+  const babyDigimonList: Digimon[] = digimonList
+    .filter((digimon) => digimon.level === 1)
+    .sort((a, b) => {
+      if (a.name > b.name) {
+        return 1;
+      } else if (b.name > a.name) {
+        return -1;
+      } else {
+        return 0;
+      }
+    });
+  const inTrainingDigimonList: Digimon[] = digimonList
+    .filter((digimon) => digimon.level === 2)
+    .sort((a, b) => {
+      if (a.name > b.name) {
+        return 1;
+      } else if (b.name > a.name) {
+        return -1;
+      } else {
+        return 0;
+      }
+    });
+  const rookieDigimonList: Digimon[] = digimonList
+    .filter((digimon) => digimon.level === 3)
+    .sort((a, b) => {
+      if (a.name > b.name) {
+        return 1;
+      } else if (b.name > a.name) {
+        return -1;
+      } else {
+        return 0;
+      }
+    });
+  const adultDigimonList: Digimon[] = digimonList
+    .filter((digimon) => digimon.level === 4)
+    .sort((a, b) => {
+      if (a.name > b.name) {
+        return 1;
+      } else if (b.name > a.name) {
+        return -1;
+      } else {
+        return 0;
+      }
+    });
+  const perfectDigimonList: Digimon[] = digimonList
+    .filter((digimon) => digimon.level === 5)
+    .sort((a, b) => {
+      if (a.name > b.name) {
+        return 1;
+      } else if (b.name > a.name) {
+        return -1;
+      } else {
+        return 0;
+      }
+    });
+  const ultimateDigimonList: Digimon[] = digimonList
+    .filter((digimon) => digimon.level === 6)
+    .sort((a, b) => {
+      if (a.name > b.name) {
+        return 1;
+      } else if (b.name > a.name) {
+        return -1;
+      } else {
+        return 0;
+      }
+    });
+  const superUltimateDigimonList: Digimon[] = digimonList
+    .filter((digimon) => digimon.level === 7)
+    .sort((a, b) => {
+      if (a.name > b.name) {
+        return 1;
+      } else if (b.name > a.name) {
+        return -1;
+      } else {
+        return 0;
+      }
+    });
 
   return (
     <>
@@ -38,6 +99,27 @@ export default function List() {
         <div style={{ paddingBottom: "2rem" }}>
           {babyDigimonList.length > 0 && (
             <Group name="Baby Level" list={babyDigimonList} />
+          )}
+          {inTrainingDigimonList.length > 0 && (
+            <Group name="In Training Level" list={inTrainingDigimonList} />
+          )}
+          {rookieDigimonList.length > 0 && (
+            <Group name="Rookie Level" list={rookieDigimonList} />
+          )}
+          {adultDigimonList.length > 0 && (
+            <Group name="Adult Level" list={adultDigimonList} />
+          )}
+          {perfectDigimonList.length > 0 && (
+            <Group name="Perfect Level" list={perfectDigimonList} />
+          )}
+          {ultimateDigimonList.length > 0 && (
+            <Group name="Ultimate Level" list={ultimateDigimonList} />
+          )}
+          {superUltimateDigimonList.length > 0 && (
+            <Group
+              name="Super Ultimate Level"
+              list={superUltimateDigimonList}
+            />
           )}
         </div>
       </main>

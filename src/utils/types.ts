@@ -9,4 +9,5 @@ export interface Digimon {
   unreleased: boolean;
   jogress: boolean;
   xEvolution: boolean;
-}
+} 
+
