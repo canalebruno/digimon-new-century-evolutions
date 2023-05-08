@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "./styles.module.scss";
 import nameFormatting from "@/utils/formatting";
+import { IconButton } from "@mui/material";
 // import { Digimon } from "../../utils/types";
 
 interface CardProps {
@@ -110,6 +111,7 @@ export default function Card({ digimon, evolutionChart = false }: CardProps) {
           className={styles.overlayContainer}
           style={{ display: overlayActive ? "flex" : "none" }}
         >
+          <IconButton></IconButton>
           <p
             dangerouslySetInnerHTML={{ __html: nameFormatting(digimon.name) }}
           />

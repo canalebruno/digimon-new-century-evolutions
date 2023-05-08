@@ -1,6 +1,7 @@
 .container {
-
+margin-bottom: 3rem;
   .cardsContainer {
+    margin-top: 1rem;
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     gap: 1rem;

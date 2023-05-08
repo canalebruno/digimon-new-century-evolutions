@@ -1,6 +1,7 @@
 import { Digimon } from "../../utils/types";
 import Card from "@/component/Card";
 import styles from "./styles.module.scss";
+import LongCard from "../LongCard";
 
 interface GroupProps {
   name: string;
@@ -13,7 +14,7 @@ export default function Group({ name, list }: GroupProps) {
       <p>{name}</p>
       <div className={styles.cardsContainer}>
         {list.map((digimon) => {
-          return <Card digimon={digimon} />;
+          return <LongCard digimon={digimon} />;
         })}
       </div>
     </div>

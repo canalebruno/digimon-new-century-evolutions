@@ -1,0 +1,58 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 20rem;
+  width: 11rem;
+  background-color: white;
+  border-radius: 0.2rem;
+  padding: 0.5rem;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+  .overlayContainer {
+    position: absolute;
+    background-color: rgba($color: #000000, $alpha: 0.5);
+    border-radius: 1rem;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    // color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 1rem;
+    
+  }
+  
+    .imageContainer {
+      display: flex;
+      justify-content: center;
+      border-radius: 0.2rem;
+      height: 100%;
+      margin-bottom: 0.5rem;
+
+      img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: cover;
+      }
+  }
+
+  .nameContainer {
+    padding: 0.5rem;
+    background-color: #233EA8;
+    border-radius: 0.2rem;
+    text-align: center;
+    width: 100%;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-x: hidden;
+    // overflow-y: hidden;
+    font-weight: bold;
+    color: white;
+    white-space: nowrap;
+  }
+}
