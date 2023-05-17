@@ -3,6 +3,8 @@ import styles from "./styles.module.scss";
 import nameFormatting from "@/utils/formatting";
 import { IconButton } from "@mui/material";
 import s from "@mui/icons-material/FavoriteBorder";
+import FavoriteIcon from "../FavoriteIcon";
+import GotIcon from "../GotIcon";
 // import { Digimon } from "../../utils/types";
 
 interface CardProps {
@@ -197,6 +199,10 @@ export default function LongCard({ digimon }: CardProps) {
 
   return (
     <div className={styles.container} id={`${digimon.id}-container`}>
+      <div className={styles.overlayContainer}>
+        <GotIcon />
+        <FavoriteIcon />
+      </div>
       <div className={styles.imageContainer}>
         <img
           src={`/${digimon.id}.png`}
