@@ -207,7 +207,10 @@ export default function LongCard({ digimon }: CardProps) {
         <img
           src={`/${digimon.id}.png`}
           alt={digimon.name}
-          style={{ objectPosition: fixXAxis(digimon.id) }}
+          style={{
+            objectPosition: fixXAxis(digimon.id),
+            filter: digimon.unreleased ? "grayscale(100%)" : undefined,
+          }}
         />
       </div>
       <div className={styles.nameContainer}>

@@ -13,7 +13,7 @@ export default function Home() {
 
   function findEvolutions(ids: number[] | never[]) {
     return ids.map((id) => {
-      if (!id || id >= 1000) {
+      if (!id) {
         return;
       }
 

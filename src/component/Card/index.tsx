@@ -124,7 +124,7 @@ export default function Card({ digimon, evolutionChart = false }: CardProps) {
           )}
         </div>
         <div className={styles.imageContainer}>
-          <img src={`/${digimon.id}.png`} alt={digimon.name} />
+          <img style={{filter: digimon.unreleased ? "grayscale(100%)" : undefined,}} src={`/${digimon.id}.png`} alt={digimon.name} />
         </div>
 
         <div className={styles.connectorContainer}>
